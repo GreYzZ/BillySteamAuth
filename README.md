@@ -1,5 +1,9 @@
 BillySteamAuth is the tiniest PHP Steam Authenticator and works everywhere.
 
+##Usage
+
+Create a new directory anywhere you want and add billysteamauth.php and openid.php to it.
+
 ##Example
 
 Index page:
