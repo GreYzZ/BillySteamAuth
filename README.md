@@ -1,2 +1,27 @@
-# BillySteamAuth
-A simple, tiny and easy to use OpenID Steam authenticator that works everywhere without a need to configure or tinker.
+BillySteamAuth is the tiniest PHP Steam Authenticator and works everywhere.
+
+##Example
+
+Index page:
+
+```php
+session_start();
+if (!isset($_SESSION["steamid"])) {
+	header("LOCATION: /login/");
+}
+```
+
+Login page:
+
+```php
+include("inc/billysteamauth/billysteamauth.php");
+$BillySteamAuth = new BillySteamAuth();
+
+if (isset($BillySteamAuth -> SteamID)) {
+	header("LOCATION: /");
+}
+
+if (isset($_POST["login"]) && !isset($_SESSION["steamid"])) {
+	header("LOCATION: " . $BillySteamAuth -> loginURL());
+}
+```
