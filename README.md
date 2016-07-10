@@ -10,7 +10,7 @@ Index page:
 
 ```php
 session_start();
-if (!isset($_SESSION["steamid"])) {
+if (!isset($_SESSION["session variable name"])) {
 	header("LOCATION: /login/");
 }
 ```
@@ -19,13 +19,13 @@ Login page:
 
 ```php
 include("inc/billysteamauth/billysteamauth.php");
-$BillySteamAuth = new BillySteamAuth();
+$BillySteamAuth = new BillySteamAuth("session variable name");
 
 if (isset($BillySteamAuth -> SteamID)) {
 	header("LOCATION: /");
 }
 
-if (isset($_POST["login"]) && !isset($_SESSION["steamid"])) {
+if (isset($_POST["login"]) && !isset($_SESSION["session variable name"])) {
 	header("LOCATION: " . $BillySteamAuth -> loginURL());
 }
 ```
