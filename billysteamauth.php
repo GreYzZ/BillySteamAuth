@@ -1,6 +1,6 @@
 <?php
 	@session_start();
-
+	
 	class BillySteamAuth {
 		public function __construct($sessionname = "steamid") {
 			if (isset($_SESSION[$sessionname])) {
@@ -19,8 +19,40 @@
 			}
 		}
 		
-		public function loginURL() {
+		public function LoginURL() {
 			return $this -> openid -> authUrl();
+		}
+		
+		public function StripOpenID($get = null) {
+			if (!$get) {
+				$get = $_GET;
+			}
+			$OpenID = [
+				
+				"openid_ns",
+				"openid_mode",
+				"openid_op_endpoint",
+				"openid_claimed_id",
+				"openid_identity",
+				"openid_return_to",
+				"openid_response_nonce",
+				"openid_assoc_handle",
+				"openid_signed",
+				"openid_sig",
+				
+			];
+			$builduri = "";
+			foreach($get as $key => $value) {
+				if (!in_array($key,$OpenID)) {
+					if ($builduri == "") {
+						$builduri = "?";
+					} else {
+						$builduri .= "&";
+					}
+					$builduri .= $key . "=" . $value;
+				}
+			}
+			return $builduri;
 		}
 	}
 ?>
