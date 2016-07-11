@@ -26,6 +26,29 @@ if (isset($BillySteamAuth -> SteamID)) {
 }
 
 if (isset($_POST["login"]) && !isset($_SESSION["session variable name"])) {
-	header("LOCATION: " . $BillySteamAuth -> loginURL());
+	header("LOCATION: " . $BillySteamAuth -> LoginURL());
+}
+```
+
+##Other Functions
+
+`StripOpenID`
+
+Returns `$_SERVER["REQUEST_URI"]` without the OpenID `$_GET` variables.
+
+```php
+include("inc/billysteamauth/billysteamauth.php");
+$BillySteamAuth = new BillySteamAuth("session variable name");
+
+if (isset($BillySteamAuth -> SteamID)) {
+	header("LOCATION: /");
+}
+
+if (isset($_POST["login"]) && !isset($_SESSION["session variable name"])) {
+	header("LOCATION: " . $BillySteamAuth -> LoginURL());
+}
+
+if (isset($_GET["openid_identity"])) {
+	header("LOCATION: //" . $_SERVER["HTTP_HOST"] . "/" . $BillySteamAuth -> StripOpenID());
 }
 ```
